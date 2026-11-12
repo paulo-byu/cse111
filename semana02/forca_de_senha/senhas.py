@@ -1,10 +1,12 @@
-#
-#
+# Criatividade: Criei uma função para contar a quantidade de senhas 
+# tentadas com cada força. O resultado é apresentado ao sair, digitando senha q ou Q.
 
 MINUSCULAS = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
 MAIUSCULAS = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
 DIGITOS = ["0","1","2","3","4","5","6","7","8","9"]
 ESPECIAIS = ["!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "-", "_", "=", "+", "[", "]", "{", "}", "|", ";", ":", """, """, ",", ".", "<", ">", "?", "/", "`", "~"]
+
+forca_0, forca_1, forca_2, forca_3, forca_4, forca_5 = 0, 0, 0, 0, 0, 0
 
 def procurar_palavra(palavra, nome_do_arquivo, maiusculas_e_minusculas = False):
     """
@@ -52,18 +54,21 @@ def calcular_complexidade(palavra):
     Tipo de Retorno: Inteiro
     """
     contador = 0
-    tem_minuscula = palavra_tem_caractere(palavra, MINUSCULAS)
-    if tem_minuscula:
-        contador += 1
-    tem_maiuscula = palavra_tem_caractere(palavra, MAIUSCULAS)
-    if tem_maiuscula:
-        contador += 1
-    tem_digito = palavra_tem_caractere(palavra, DIGITOS)
-    if tem_digito:
-        contador += 1
-    tem_especial = palavra_tem_caractere(palavra, ESPECIAIS)
-    if tem_especial:
-        contador += 1
+    if palavra == "":
+        contador = 0
+    else:
+        tem_minuscula = palavra_tem_caractere(palavra, MINUSCULAS)
+        if tem_minuscula:
+            contador += 1
+        tem_maiuscula = palavra_tem_caractere(palavra, MAIUSCULAS)
+        if tem_maiuscula:
+            contador += 1
+        tem_digito = palavra_tem_caractere(palavra, DIGITOS)
+        if tem_digito:
+            contador += 1
+        tem_especial = palavra_tem_caractere(palavra, ESPECIAIS)
+        if tem_especial:
+            contador += 1
     return contador
 
 def validar_senha(senha, comprimento_min = 10, comprimento_forte = 16):
@@ -92,19 +97,44 @@ def validar_senha(senha, comprimento_min = 10, comprimento_forte = 16):
     complexidade = calcular_complexidade(senha)
     return complexidade + 1
 
+def contar_forca(forca):
+    """
+    A função contar_forca conta a quantidade de senhas experimentadas com cada força de senha.
+    Parâmetros: forca
+    Tipo de Retorno: Por utilizar variáveis globais, não terá retorno
+    """
+    global forca_0, forca_1, forca_2, forca_3, forca_4, forca_5
+    if forca == 0:
+        forca_0 += 1
+    elif forca == 1:
+        forca_1 += 1
+    elif forca == 2:
+        forca_2 += 1
+    elif forca == 3:
+        forca_3 += 1
+    elif forca == 4:
+        forca_4 += 1
+    elif forca == 5:
+        forca_5 += 1
+
 def main():
     """
     Fornece o loop de entrada do usuário. O loop solicita ao usuário uma senha para teste.
     Se a senha for qualquer coisa diferente de "q" ou "Q", chame a função validar_senha e informe os resultados ao usuário.
     Se o usuário digitar "q" ou "Q", sai do programa.
     """
+    global forca_0, forca_1, forca_2, forca_3, forca_4, forca_5
     while True:
         senha = input("Por favor, digite a senha: ")
         if senha == "Q" or senha == "q":
+            print("Foram feitas tentativas com as seguintes forças:")
+            print(f"Força 0: {forca_0} - Força 1: {forca_1} - Força 2: {forca_2} - Força 3: {forca_3} - Força 4: {forca_4} - Força 5: {forca_5}")
+            forca_0, forca_1, forca_2, forca_3, forca_4, forca_5 = 0, 0, 0, 0, 0, 0
             break
         else:
             forca_senha = validar_senha(senha)
             print(f"Força: {forca_senha}")
+            contar_forca(forca_senha)
 
 if __name__ == "__main__":
     main()
