@@ -1,3 +1,5 @@
+# Desafios Adicionais: Criado o teste da função que transforma a pressão da água de kPa para MCA.
+
 from pytest import approx
 import pytest
 from fluxo_de_agua import calc_altura_coluna_agua, calc_pressao_pela_altura, calc_perda_pressao_tubo, calc_perda_pressao_conexoes, calc_num_reynolds, calc_perda_pressao_reducao_tubo, calc_kpa_para_mca

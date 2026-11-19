@@ -1,6 +1,5 @@
-# No código abaixo você verá # TODO.
-# Essa é uma das anotações especiais que o programador pode usar em comentários para indicar que uma tarefa
-#  está pendente. “TODO” traduzido para o português significa “a fazer”.
+# Dasafios Adicionais: Definidas constantes fora da função (Aceleração da gravidade e viscosidade da água).
+# Criada a função para transformar a pressão da água de kPa para MCA.
 
 # Constantes dos tubos e da água
 PVC_SCHED80_DIAMETRO_INTERNO = 0.28687   # (metros)  11.294 polegadas
